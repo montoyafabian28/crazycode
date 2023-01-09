@@ -1,6 +1,5 @@
-export default class BookmarksControl {
+class BookmarksControl {
     #node = ""
-    #value = ""
     #configP = {configP} 
     #configPData = this.#configP['data']
     #results = []
