@@ -1,3 +1,7 @@
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+  }));
+exports.BookmarksControl = BookmarksControl;
 class BookmarksControl {
     #node = ""
     #configP = {configP} 
