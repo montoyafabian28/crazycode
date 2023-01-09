@@ -1,4 +1,4 @@
-export default class BookmarksControl {
+class BookmarksControl {
     #node = ""
     #value = ""
     #configP = {configP} 
