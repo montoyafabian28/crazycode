@@ -33,6 +33,10 @@ class BookmarksControl {
         return this.#configPData
     }
 
+    get rv() {
+        return this.#rv
+    }
+
     #selectMethod() {
         switch(this.#method){
             case 'values':
