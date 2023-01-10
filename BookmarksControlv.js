@@ -1,12 +1,13 @@
 class BookmarksControl {
-    #node = ""
+    #node = ''
     #configP = {configP} 
     #configPData = this.#configP['data']
     #results = []
     #method = ''
     #check = 'n'
+    #rv = {returned_values}
 
-    constructor(method, node) {
+    constructor(method, node = 'bookmarks') {
         this.#method = method
         this.#node = node
         this.#selectMethod()
@@ -31,6 +32,7 @@ class BookmarksControl {
     get configPData() {
         return this.#configPData
     }
+
     #selectMethod() {
         switch(this.#method){
             case 'values':
@@ -38,7 +40,7 @@ class BookmarksControl {
                 break
             case 'returned':
             default:
-                this.#results = {returned_values}['bk']
+                this.#results = this.#rv['bk']
                 break
         }
     }
@@ -66,11 +68,10 @@ class BookmarksControl {
         const includesTheBK = this.#configPData[this.#node].some(element => element.includes(bk))
 
         if (includesTheBK && !this.isSet(bookmark)) {
-
-            if (needConcat == true) {
-                if (value == true) {
+            if (needConcat === true) {
+                if (value === true) {
                     bk = bookmark + 'YES'
-                }else if (value == false) {
+                }else if (value === false) {
                     bk = bookmark + 'NO'
                 }
             }
@@ -91,8 +92,9 @@ class BookmarksControl {
 
     setComplex(bookmark, value, {prefix = '', sufix = '', conditions = undefined}) {
         const bk = prefix + bookmark + sufix
+        const includesTheBK = this.#configPData[this.#node].some(element => element.includes(bk))
 
-        if (this.#configPData[this.#node].includes(bk) && !this.isSet(bk)) {
+        if (includesTheBK && !this.isSet(bk)) {
             if (typeof value === 'boolean') {
                 value = this.#check
             }
@@ -110,7 +112,7 @@ class BookmarksControl {
 
 const bkControl = new BookmarksControl('values','bookmarks')
 
-const res = bkControl.setSimple('Preventive_Deductibleapplies',true, true)  // Resultado: Preventive_DeductibleappliesYES: n
+const res = bkControl.setSimple('Preventive_Deductibleapplies',true, true, () => true)  // Resultado: Preventive_DeductibleappliesYES: n
 const res2 = bkControl.setComplex('_4quads', true, 
     {prefix: 'D4341', sufix:'YES', conditions: () => res === true}) // Resultado: D4341_4quadsYES: n
 
